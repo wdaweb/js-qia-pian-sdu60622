@@ -5,9 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&display=swap" rel="stylesheet">
     <style>
+        * {
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
         body {
-            background-color: #1f272d;
+            background: rgb(31, 131, 0);
         }
 
         #game {
@@ -60,7 +65,7 @@
         .front-face {
             width: 200px;
             height: 250px;
-            background-color: #00BB00;
+            background-color: rgb(15, 193, 247);
             transform: rotateY(0deg) translateZ(50px);
         }
 
@@ -74,7 +79,7 @@
         .left-face {
             width: 100px;
             height: 250px;
-            background: -webkit-linear-gradient(left, whitesmoke 0%, whitesmoke 70%, #00BB00 71%, #00BB00 100%);
+            background: -webkit-linear-gradient(left, whitesmoke 0%, whitesmoke 70%, rgb(15, 193, 247) 71%, rgb(15, 193, 247) 100%);
             transform: rotateY(-90deg) translateZ(50px);
         }
     </style>
@@ -92,9 +97,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
+        start_time = new Date().getTime();
         $(function () {
             // 產生16張卡片
-            for (let i = 0; i < 12; i++) {
+            for (let i = 0; i < 4; i++) {
                 $("#game").append(`
                 <div class="container">
         <div class="disk-contaniner">
@@ -136,11 +142,12 @@
                         $(".open").fadeOut(1000, 0).addClass("ok");
                     }
                     if ($(".ok").length == $(".disk-contaniner").length) {
+                        end_time = new Date().getTime();
                         setTimeout(() => {
                             Swal.fire({
                                 icon: 'success',
-                                title: '恭喜',
-                                text: '恭喜過關'
+                                title: '恭喜過關',
+                                text: `一共花了${(end_time - start_time) / 1000}秒`
                             })
                         }, 1000);
                     }
